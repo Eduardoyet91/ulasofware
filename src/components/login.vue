@@ -87,9 +87,7 @@ const email = ref('')
 
 
     const initLogin = async() =>{
- console.log('entre a la funcion')
- console.log(password.value)
- console.log(email.value)
+
 
  userStore.loginUser(email.value,password.value) 
 

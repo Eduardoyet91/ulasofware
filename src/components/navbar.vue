@@ -13,10 +13,10 @@
 
                 
                 <router-link :to="'/' " @click="userStore.result=false" class="bg-sky-700 hover:bg-sky-400 px-3 py-2  rounded-md text-sm font-medium text-white bg-opacity-50" >Inicio</router-link> 
-                <router-link :to="'/home' " @click="userStore.result=false" class="bg-sky-700 hover:bg-sky-400 px-3 py-2  rounded-md text-sm font-medium text-white bg-opacity-50" >home</router-link> 
+                 
                 
-                <router-link :to="'/perfil' " class="bg-sky-700 hover:bg-sky-400 px-3 py-2  rounded-md text-sm font-medium text-white bg-opacity-50" >Perfil proveedor</router-link> 
-                <router-link :to="'/home'" @click="userStore.result=true" class="bg-sky-700 hover:bg-sky-400 px-3 py-2  rounded-md text-sm font-medium text-white bg-opacity-50" >Resultados</router-link> 
+               
+        
                 
                 
               </div>
@@ -81,73 +81,16 @@ import Proveedorper from '../components/proveedorper.vue'
 import {useUserStore} from '../stores/user'
 import {
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Switch,
-  SwitchDescription,
-  SwitchGroup,
-  SwitchLabel,
 } from '@headlessui/vue'
-import { SearchIcon } from '@heroicons/vue/solid'
-import {
-  BellIcon,
-  CogIcon,
-  CreditCardIcon,
-  KeyIcon,
-  MenuIcon,
-  UserCircleIcon,
-  ViewGridAddIcon,
-  XIcon,
-} from '@heroicons/vue/outline'
 
-const user = {
-  name: 'Debbie Lewis',
-  handle: 'deblewis',
-  email: 'debbielewis@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
-}
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Jobs', href: '#', current: false },
-  { name: 'Applicants', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-]
-const subNavigation = [
-  { name: 'Profile', href: '#', icon: UserCircleIcon, current: true },
-  { name: 'Account', href: '#', icon: CogIcon, current: false },
-  { name: 'Password', href: '#', icon: KeyIcon, current: false },
-  { name: 'Notifications', href: '#', icon: BellIcon, current: false },
-  { name: 'Billing', href: '#', icon: CreditCardIcon, current: false },
-  { name: 'Integrations', href: '#', icon: ViewGridAddIcon, current: false },
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
+
+
 
 export default {
   components: {
     Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
     Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    Switch,
-    SwitchDescription,
-    SwitchGroup,
-    SwitchLabel,
-    BellIcon,
-    MenuIcon,
-    SearchIcon,
-    XIcon,
     Cat,
     List,
     Empty,
@@ -156,21 +99,11 @@ export default {
      Login,
   },
   setup() {
-    const availableToHire = ref(true)
-    const privateAccount = ref(false)
-    const allowCommenting = ref(true)
-    const allowMentions = ref(true)
+    
     const userStore = useUserStore()
 
     return {
-      user,
-      navigation,
-      subNavigation,
-      userNavigation,
-      availableToHire,
-      privateAccount,
-      allowCommenting,
-      allowMentions,
+     
       userStore
     }
   },

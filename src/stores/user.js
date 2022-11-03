@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import router from "../router";
+import { directus } from "../../src/services/directus.js";
 
 
 
@@ -39,7 +40,16 @@ export const useUserStore = defineStore("userStore", {
             perfil: false,
             result: false,
             register: false,
-            error: false
+            error: false,
+            proveedores: [],
+            categories: [],
+            array: [],
+            proveedorebyCat: [],
+            result: [],
+            categobyid: []
+
+
+
 
 
 
@@ -47,7 +57,7 @@ export const useUserStore = defineStore("userStore", {
 
     ),
     persist: {
-        paths: ['userAuthCake'],
+        paths: ['userAuthCake', 'proveedores', 'result', 'categories'],
     },
 
     actions: {
@@ -155,58 +165,129 @@ export const useUserStore = defineStore("userStore", {
 
 
 
-        async getProfile() {
+        async getProv() {
+            //se obtienen todos los proveedores
+            const prov = directus.items('Proveedores');
+            console.log('buscando proveedores')
 
-
-
-            // router.push("/profile");            
 
             try {
+                this.proveedores = await prov.readByQuery({})
 
-
-
-                let myHeaders = new Headers();
-                myHeaders.append("Authorization", "Bearer " + valor);
-                myHeaders.append("Cookie", "PHPSESSID=boh7ejg10hajd7g4e94f6r3cpo; csrfToken=fOK%2BNaerF5hObyziagqDq2YxNjg2OTIxODNmZDE2ODYwYmFhMmVhMzk1MTU4NGVkNDFhYzMyZGY%3D");
-
-
-
-
-                let raw = {}
-
-                var requestOptions = {
-
-                    method: "POST",
-                    body: JSON.stringify(raw),
-                    headers: myHeaders,
-
-                };
-
-
-
-                await fetch("https://wsmainbackend.ponce.cloud/api/user/getProfile", requestOptions)
-                    .then(response => response.json())
-                    .then(json => {
-
-                        console.log(json),
-
-                            console.log(json.data),
-                            this.userAuthCake = json.data
-                        console.log(this.userAuthCake)
-
-                    })
-
-                .catch(err => console.log(err));
-
-
-
-
+                console.log(this.proveedores)
 
 
             } catch (error) {
                 console.log(error);
             } finally {
-                this.loadingUser = false;
+
+            }
+        },
+
+        async getCatbyid(id) {
+            this.loadingBig = true
+            this.result = []
+                //se obtienen los id de los prveedores asociados a dicha categoria
+            const cat = directus.items('Proveedores_Categorias');
+            console.log('buscando Categorias')
+
+
+            try {
+                this.categobyid = await cat.readByQuery(
+
+                    {
+                        fields: ['Proveedores_id'],
+
+                        filter: {
+
+                            Categorias_id: {
+                                _eq: id
+                            },
+                        }
+                    }, )
+
+                console.log(this.categobyid.data)
+
+                let i = 0
+                this.categobyid.data.forEach(dato => {
+
+                    console.log(dato.Proveedores_id)
+                    let resp = this.proveedores.data.find(element => element.id === dato.Proveedores_id);
+                    console.log(resp)
+                    if (resp != undefined) {
+                        this.result[i] = resp
+                        console.log(this.result[i])
+                        i = i + 1
+
+                    }
+
+                    resp = undefined
+
+
+
+                });
+                this.loadingBig = false
+                router.push("/home")
+
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+
+            }
+        },
+
+        async getCat() {
+            const cate = directus.items('Categorias');
+            console.log('buscando Categorias')
+
+
+            try {
+                this.categories = await cate.readByQuery(
+
+                    {}, )
+
+                console.log(this.categories.data)
+
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+
+            }
+        },
+        async getProveebyQuery(query) {
+            this.loadingBig = true
+            const provee = directus.items('Proveedores');
+            console.log('buscando Categorias')
+            this.result = []
+            console.log(query)
+
+            try {
+                let result = await provee.readByQuery(
+
+                    {
+                        filter: {
+
+                            Nombre: {
+                                _contains: query
+                            },
+                        }
+
+
+                    }, )
+                this.result = result.data
+
+                console.log(this.result)
+                this.loadingBig = false
+
+                router.push("/home")
+
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+
             }
         },
 

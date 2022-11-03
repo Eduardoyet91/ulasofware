@@ -9,6 +9,8 @@ import Perfil from "./views/perfil.vue";
 
 const requireAuth = async() => {
     const userStore = useUserStore();
+    userStore.getCat()
+    userStore.getProv()
 
     const user = await userStore.currentUser();
     if (user) {
