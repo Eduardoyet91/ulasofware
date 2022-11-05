@@ -17,17 +17,21 @@
            
             <div class="hidden lg:block lg:ml-4">
               <div class="flex items-center gap-4">
-                <h1 class="flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white  sm:px-8">Servicio tecnico </h1>
+                <h1 class="flex items-center justify-center px-4 py-2 border border-transparent text-xs font-medium rounded-md shadow-sm text-white  sm:px-8">Servicio tecnico </h1>
 
-                  <button @click="userStore.open=true"  class="flex items-center justify-center px-2 py-2 border border-white text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8">Iniciar sesion </button>
+                  <button v-show="!userStore.loadingSession" @click="userStore.open=true"  class="flex items-center justify-center px-2 py-2 border border-white text-xs font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8">Iniciar sesion </button>
+                   <button v-show="userStore.loadingSession" @click="userStore.logout()" class="flex items-center justify-center px-2 py-2 border border-white text-xs font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8">Cerrar sesion </button>
+                    
 
                 
 
                 <!-- Profile dropdown -->
                 
               </div>
+              
             </div>
           </div>
+          
         </div>
 
         
@@ -55,15 +59,19 @@
                     <SearchIcon class="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                   </div>
                   <input v-model.trim="query" id="search" name="search" class="block w-full h-10 bg-blue-500 bg-opacity-50 py-2 pl-10 pr-3 border border-white rounded-md leading-5 placeholder-sky-300 focus:outline-none focus:bg-white focus:ring-white focus:border-white focus:placeholder-gray-500 focus:text-gray-900 sm:text-sm" placeholder="¿Que estas buscando?" type="search" />
+                
                 </div>
+                <p v-show="userStore.error" class="mt-2 ml-8">Debe ingresar un criterio de busqueda</p>
               </div>
             </div>
             
               <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                 <div  class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-1 sm:gap-5">
-                 <!-- <button class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 sm:px-8">Buscar </button>-->
+                 <!-- <button class="flex items-center justify-center px-4 py-3 border border-transparent text-xs font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 sm:px-8">Buscar </button>-->
                   
-                  <button @click="userStore.getProveebyQuery(query)" class="flex items-center justify-center px-4 py-2 border border-white text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8">Buscar </button>
+                  <button v-show="!userStore.loadingSearch" @click="userStore.getProveebyQuery(query)" class="flex items-center justify-center px-4 py-2 border border-white text-xs font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8">Buscar </button>
+                  <button v-show="userStore.loadingSearch" class="flex items-center justify-center px-4 py-2 border border-white text-xs font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8"><Spin/></button>
+                
                 </div>
               </div>
               <Cat/>
@@ -84,6 +92,8 @@ import Cat from '../components/categories.vue'
 import {useUserStore} from '../stores/user'
 import { Disclosure} from '@headlessui/vue'
 import { SearchIcon } from '@heroicons/vue/solid'
+import Spin from '../components/spin.vue'
+
 
 
 
@@ -91,7 +101,8 @@ export default {
   components: {
     Disclosure,
     SearchIcon,   
-    Cat
+    Cat,
+    Spin
   },
   setup() {
     

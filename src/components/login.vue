@@ -47,13 +47,14 @@
           
 
           <div class=" mt-4">
-            <button @submit.prevent="initLogin" class="w-full flex justify-center  shadow-lg py-2 px-4 border border-white rounded-md shadow-sm text-sm font-medium text-white  bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Entrar</button>
+            <button v-show="!userStore.loadingUser" @submit.prevent="initLogin" class="w-full flex justify-center  shadow-lg py-2 px-4 border border-white rounded-md shadow-sm text-sm font-medium text-white  bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Entrar</button>
+             <button v-show="userStore.loadingUser" class="w-full flex justify-center  shadow-lg py-2 px-4 border border-white rounded-md shadow-sm text-sm font-medium text-white  bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><Spin/></button>
              
 
           </div>
         </form>
 
-        <button @click="userStore.open=false" class="w-full mt-4 flex shadow-lg justify-center py-2 px-4 border border-whitet rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancelar</button>
+        <button v-show="!userStore.loadingUser" @click="userStore.open=false" class="w-full mt-4 flex shadow-lg justify-center py-2 px-4 border border-whitet rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancelar</button>
 
             
           </div>
@@ -66,8 +67,8 @@
 <script>
 import { ref } from 'vue'
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { CheckIcon } from '@heroicons/vue/outline';
 import {useUserStore} from '../stores/user'
+import Spin from './spin.vue'
 
 export default {
   components: {
@@ -76,7 +77,7 @@ export default {
     DialogTitle,
     TransitionChild,
     TransitionRoot,
-    CheckIcon,
+    Spin
   },
   setup() {
 

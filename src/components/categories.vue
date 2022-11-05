@@ -27,7 +27,7 @@
 
           
 
-          <div class="sm:mt-0 sm:ml-4">
+          <div class="sm:mt-0 sm:ml-1">
             <div class="-m-1 mt-2 flex flex-wrap items-center">
               <span v-for="filtro in userStore.categories.data" :key="filtro.id" class="m-1 inline-flex rounded-full  items-center py-1.5 pl-3 pr-2 text-sm font-medium bg-white text-gray-900">
                <button @click="userStore.getCatbyid(filtro.id)"><span>{{ filtro.Nombre }}</span></button> 

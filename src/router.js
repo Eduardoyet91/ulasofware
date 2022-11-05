@@ -6,6 +6,7 @@ import Start from "./views/Start.vue";
 
 import Dashboard from "./views/Dashboard.vue";
 import Perfil from "./views/perfil.vue";
+import Soporte from "./views/soporte.vue";
 
 const requireAuth = async() => {
     const userStore = useUserStore();
@@ -30,7 +31,9 @@ const routes = [
 
     { path: "/home", component: Dashboard, beforeEnter: requireAuth },
 
-    { path: "/perfil", component: Perfil, beforeEnter: requireAuth }
+    { path: "/perfil", component: Perfil, beforeEnter: requireAuth },
+
+    { path: "/soporte", component: Soporte, beforeEnter: requireAuth }
 
 
 

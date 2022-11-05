@@ -18,17 +18,39 @@
                     <div>
                       <h1  class="block text-md font-medium text-gray-700"> Proveedor </h1>
                       <div class="mt-1 rounded-md shadow-sm flex">
-                        <span class="px-3 inline-flex items-center text-sm"> Ivoo</span>
+                        <span class="px-3 inline-flex items-center text-sm">{{userStore.proveedor.Nombre}}</span>
                       </div>
                     </div>
+
+                      <div>
+                   <h1 class="text-center text-xl font-extrabold mt-2 tracking-tight sm:text-xl lg:text-xl">
+                
+                <span class="block text-sky-600">Publicidad</span>
+              </h1>
+              <div class="mr-4"> 
+                         
+    <ul role="list" class="mt-12 grid grid-cols-4">
+    <li v-for="file in userStore.ofertas" :key="file.id" class="ml-1">
+        <img :src="file.Image" alt="" class="border rounded-3xl">
+        <button v-show="userStore.loadingSession" @click="userStore.deletePublic(file.id)"  class="w-full flex justify-center  shadow-lg py-2 px-4 border border-white rounded-md shadow-sm text-sm font-medium text-red hover:bg-sky-700"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+</svg>
+</button>
+
+                 
+    </li>
+  </ul>
+                  </div>
+                 
+                  
+                  </div>
 
                     <div>
                       <h1 class="block text-md font-medium text-gray-700">Sobre nosotros </h1>
                       <div class="mt-1">
-                        <p class="mt-2 text-sm text-gray-500">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus totam vitae voluptate porro tenetur quam repellendus atque tempora iusto tempore esse, dolores, exercitationem voluptas, suscipit itaque veritatis. Minima, voluptates voluptatibus!.</p>
+                        <p class="mt-2 text-sm text-gray-500">{{userStore.proveedor.Informacion}}</p>
                        
                       </div>
-                      <p class="mt-2 text-sm text-gray-500">Brief description for your profile. URLs are hyperlinked.</p>
                     </div>
                   </div>
 
@@ -36,51 +58,53 @@
                                        
 
                     <div class="hidden relative rounded-lg overflow-hidden lg:block">
-                      <img class=" rounded-lg w-40 h-40" src="../assets/Movistar2.png" alt="" />
+                      <img v-if="(userStore.logo != undefined)" class=" rounded-lg w-40 h-40" :src= userStore.logo.Image alt="" />
+                      
                      
                     </div>
                   </div>
                 </div>
 
+
+                  
+
                 <div class="mt-6 grid grid-cols-12 gap-6">
                   <div class="col-span-12 sm:col-span-6">
                     <label for="first-name" class="block text-sm font-medium text-gray-700">Rif</label>
-                        <span class=" py-2 px-3 mt-1 inline-flex items-center text-sm"> workcation.com/ </span>
+                        <span class=" py-2 px-3 mt-1 inline-flex items-center text-sm"> {{userStore.proveedor.RIF}}</span>
                    
                    
                   </div>
 
                   <div class="col-span-12 sm:col-span-6">
                     <label for="last-name" class="block text-sm font-medium text-gray-700">Ubicacion</label>
-                   <span class=" py-2 px-3 mt-1 inline-flex items-center text-sm"> workcation.com/ </span>
+                   <span class=" py-2 px-3 mt-1 inline-flex items-center text-sm"> {{userStore.proveedor.RIF}}</span>
                   </div>
+
+                   <div class="col-span-12 sm:col-span-6">
+                    <label for="last-name" class="block text-sm font-medium text-gray-700">Local</label>
+                   <span class=" py-2 px-3 mt-1 inline-flex items-center text-sm"> {{userStore.local.numero}}</span>
+                  </div>
+                  
 
          
 
-                  <div class="col-span-12  sm:col-span-12">
-                    <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
-                    <div class="grid grid-cols-2">
-                        <div class="mr-4"> 
-    <ul role="list" class="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-    <li v-for="file in files" :key="file.source" class="relative">
-      <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-        <img :src="file.source" alt=""  />
-        <button type="button" class="absolute inset-0 focus:outline-none">
-          <span class="sr-only">View details for {{ file.title }}</span>
-        </button>
-      </div>
-      <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{{ file.title }}</p>
-      <p class="block text-sm font-medium text-gray-500 pointer-events-none">{{ file.size }}</p>
-    </li>
-  </ul>
-                  </div>
-                  <div class="m-8">
-                     <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="border rounded-3xl">
-                  </div>
-                  </div>
                   
-                  </div>
                 </div>
+
+                <div class=" mt-4">
+                    <label for="last-name" class="block text-sm mb-4 mt-2 font-medium text-gray-700">Categoria</label>
+                <div id='example' class="grid grid-cols-2">
+  <div v-for="cat in userStore.categories.data" :key="cat.id">
+  <input type="checkbox" :id="cat.Nombre" :value="cat.id" v-model="userStore.checkedNames">
+  <label>{{ cat.Nombre }}</label>
+  </div>
+  
+</div>
+
+                
+   
+                  </div>
               </div>
 
               
@@ -96,120 +120,21 @@
 </template>
 <script>
 import { ref } from 'vue'
+import {useUserStore} from '../stores/user'
 
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Switch,
-  SwitchDescription,
-  SwitchGroup,
-  SwitchLabel,
-} from '@headlessui/vue'
-import { SearchIcon } from '@heroicons/vue/solid'
-import {
-  BellIcon,
-  CogIcon,
-  CreditCardIcon,
-  KeyIcon,
-  MenuIcon,
-  UserCircleIcon,
-  ViewGridAddIcon,
-  XIcon,
-} from '@heroicons/vue/outline'
 
-const user = {
-  name: 'Debbie Lewis',
-  handle: 'deblewis',
-  email: 'debbielewis@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
-}
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Jobs', href: '#', current: false },
-  { name: 'Applicants', href: '#', current: false },
-  { name: 'Company', href: '#', current: false },
-]
-const subNavigation = [
-  { name: 'Profile', href: '#', icon: UserCircleIcon, current: true },
-  { name: 'Account', href: '#', icon: CogIcon, current: false },
-  
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
 
-const files = [
-  {
-    title: 'Comida',
-    source:
-      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-  },
-  {
-    title: 'Comida',
-    source:
-      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-  },
-  {
-    title: 'Comida',
-    source:
-      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-  },
-  {
-    title: 'Comida',
-    source:
-      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-  },
-  {
-    title: 'Comida',
-    source:
-      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-  },
-  // More files...
-]
 
 export default {
-  components: {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    Switch,
-    SwitchDescription,
-    SwitchGroup,
-    SwitchLabel,
-    BellIcon,
-    MenuIcon,
-    SearchIcon,
-    XIcon,
-   
-  },
+  
   setup() {
-    const availableToHire = ref(true)
-    const privateAccount = ref(false)
-    const allowCommenting = ref(true)
-    const allowMentions = ref(true)
+ 
+    const userStore = useUserStore()
 
     return {
-      user,
-      files,
-      navigation,
-      subNavigation,
-      userNavigation,
-      availableToHire,
-      privateAccount,
-      allowCommenting,
-      allowMentions,
+      
+      userStore,
+      
     }
   },
 }

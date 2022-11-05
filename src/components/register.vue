@@ -66,7 +66,7 @@
 <script>
 import { ref } from 'vue'
 import { Dialog, DialogOverlay, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { CheckIcon } from '@heroicons/vue/outline';
+
 import {useUserStore} from '../stores/user'
 
 export default {
@@ -76,7 +76,7 @@ export default {
     DialogTitle,
     TransitionChild,
     TransitionRoot,
-    CheckIcon,
+    
   },
   setup() {
 
@@ -87,7 +87,7 @@ const email = ref('')
 
 
     const initRegis = async() =>{
- console.log('entre a la funcion')
+
  console.log(password.value)
  console.log(email.value)
 

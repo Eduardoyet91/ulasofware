@@ -12,8 +12,8 @@
                
 
                 
-                <router-link :to="'/' " @click="userStore.result=false" class="bg-sky-700 hover:bg-sky-400 px-3 py-2  rounded-md text-sm font-medium text-white bg-opacity-50" >Inicio</router-link> 
-                 
+                <router-link v-show="!userStore.loadingSession"  :to="'/' " @click="userStore.result=false" class="bg-sky-700 hover:bg-sky-400 px-3 py-2  rounded-md text-sm font-medium text-white bg-opacity-50" >Inicio</router-link> 
+              <router-link v-show="userStore.loadingSession" :to="'/soporte' " @click="userStore.result= [],userStore.getC = false,userStore.loadingBig = false" class="bg-sky-700 hover:bg-sky-400 px-3 py-2  rounded-md text-sm font-medium text-white bg-opacity-50" >Inicio</router-link> 
                 
                
         
@@ -31,9 +31,9 @@
                 <Menu as="div" class="relative flex-shrink-0 ml-4">
                   <div>
                      <div v-show="!userStore.loadingSession" class="flex items-center gap-4">
-                <h1 class="flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white  sm:px-8">Servicio tecnico </h1>
+                <h1 class="flex items-center justify-center px-4 py-2 border border-transparent text-xs font-medium rounded-md shadow-sm text-white  sm:px-8">Servicio tecnico </h1>
 
-                  <button @click="userStore.open=true" class="flex items-center justify-center px-3 py-2 border border-white text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8">Iniciar sesion </button>
+                  <button @click="userStore.open=true" class="flex items-center justify-center px-3 py-2 border border-white text-xs font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 sm:px-8">Iniciar sesion </button>
 
                 
 
@@ -43,8 +43,8 @@
                <div v-show="userStore.loadingSession" class="flex items-center gap-4">
                
 
-                  <button @click="userStore.logout()" class="flex items-center justify-center px-4 py-2 border border-white text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700  sm:px-8">Cerrar sesion </button>
-                  <button @click="userStore.register=true" class="flex items-center justify-center px-4 py-2 border border-white text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700  sm:px-8">Registrar </button>
+                  <button @click="userStore.logout()" class="flex items-center justify-center px-4 py-2 border border-white text-xs font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700  sm:px-8">Cerrar sesion </button>
+                  <button @click="userStore.register=true" class="flex items-center justify-center px-4 py-2 border border-white text-xs font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700  sm:px-8">Registrar </button>
 
                 
 
