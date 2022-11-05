@@ -7,6 +7,7 @@
 
             <form class="divide-y divide-gray-200 lg:col-span-12" action="#" method="POST">
               <!-- Profile section -->
+               <img v-if="(userStore.banner != undefined)" class="w-full mt-4 mr-4 h-40" :src= userStore.banner.Image alt="" />
               <div class="py-6 px-4 sm:p-6 lg:pb-8">
                 <div>
                   <h2 class="text-lg leading-6 font-medium text-gray-900">Perfil Proveedor</h2>
